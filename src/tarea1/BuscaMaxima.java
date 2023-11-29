@@ -19,7 +19,7 @@ public class BuscaMaxima extends Thread {
 				maxima=entrada[i];
 			}
 		}
-		System.out.println(maxima);
+		//System.out.println(maxima);
 	}
 	//devuelvo el valor máximo al Main
 	public int getMaxima() {
