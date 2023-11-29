@@ -21,21 +21,25 @@ public class TemperaturaMaxima {
 			System.out.println(temperaturas[i]);
 		}
 		
-		BuscaMaxima bucle1 =new BuscaMaxima(temperaturas);
-		bucle1.start();
+		/*
+		*Creo el hilo
+		*BuscaMaxima bucle1 =new BuscaMaxima(temperaturas);
+		*bucle1.start();
 		
-        /* Espero a que el hilo termine antes de continuar. Si no hago esto, no devuelve bien 
-         * la temperatura máxima, devuelve 0*/ 
-        try {
-            bucle1.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-		
+        * Espero a que el hilo termine antes de continuar. Si no hago esto, no devuelve bien 
+        * la temperatura máxima, devuelve 0* 
+
+         *   try {
+				bucle1.join();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+  
 		int temperaturamaxima=bucle1.getMaxima();
 		
 		System.out.println("La temperatura más alta los últimos diez años fue "
 				+ temperaturamaxima + "ºC.");
+		*/
 	}
-
 }
