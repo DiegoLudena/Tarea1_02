@@ -1,0 +1,12 @@
+Estás trabajando en el servicio técnico del ayuntamiento de tu ciudad como desarrollador de aplicaciones.
+
+Tienes una lista de todas las temperaturas máximas que se han dado cada día en la ciudad donde trabajas los últimos 10 años y las tienes guardadas en un array de enteros.
+
+El ayuntamiento quiere publicar en la web la temperatura máxima de los últimos 10 años. ¿Cómo conseguirlo?
+
+•	INSTRUCCIONES
+
+Para hacerlo, debes seguir los siguientes pasos:
+o	Simula las temperaturas llenando un array de 3.650 posiciones y llénalo de forma aleatoria con números enteros, cogiendo valores entre -30 y 50.
+o	Para encontrar la temperatura más alta, divide el array en partes y crea tantos hilos como partes hayas creado. Cada hilo tendrá que buscar dentro del array asignado cuál es la temperatura más alta.
+o	Para finalizar, una vez encontrado el máximo de cada subconjunto del array, este te dirá cuál es el número máximo de los devueltos por cada hilo.

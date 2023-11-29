@@ -15,16 +15,17 @@ public class TemperaturaMaxima {
 			//Creo el objeto Random
 			Random temperaturaaleatoria= new Random();
 			
-			/*Como nextInt(int) crea un numero entre 0 y el int, pongo 80 de limite
+			/*Como nextInt(int) crea un numero entre 0 y uno menos que el int, pongo 81 de limite
 				y luego resto 30 para que el numero esté entre -30 y 50*/
-			temperaturas[i]=(temperaturaaleatoria.nextInt(80))-30;
-			//System.out.println(temperaturas[i]);
+			temperaturas[i]=(temperaturaaleatoria.nextInt(81))-30;
+			System.out.println(temperaturas[i]);
 		}
 		
 		BuscaMaxima bucle1 =new BuscaMaxima(temperaturas);
 		bucle1.start();
 		
-        // Espero a que el hilo termine antes de continuar
+        /* Espero a que el hilo termine antes de continuar. Si no hago esto, no devuelve bien 
+         * la temperatura máxima, devuelve 0*/ 
         try {
             bucle1.join();
         } catch (InterruptedException e) {
