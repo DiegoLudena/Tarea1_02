@@ -21,92 +21,54 @@ public class TemperaturaMaxima {
 			//System.out.println(temperaturas[i]);
 		}
 		
-		//Estoy haciendo 4 veces el crear array parte y crear e iniciar hilo. Debería poder hacer un bucle, pero no sé como.
-		//Divido la matriz temperatura en 4 partes. Le he dado vueltas hasta encontrar la clase Arrays.
-		int longitud = (temperaturas.length)/4;
-		int[] parte1 = Arrays.copyOfRange(temperaturas,0,longitud);
-		int[] parte2 = Arrays.copyOfRange(temperaturas,longitud,2*longitud);
-		int[] parte3 = Arrays.copyOfRange(temperaturas,2*longitud,3*longitud);
-		int[] parte4 = Arrays.copyOfRange(temperaturas,3*longitud,4*longitud);
-		
-		//Creo 4 hilos, con cada una de las partes
-		
-		BuscaMaxima buscamaxima1 =new BuscaMaxima(parte1);
-		buscamaxima1.start();
-		try {
-			buscamaxima1.join();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		int maxima1=buscamaxima1.getMaxima();
-		
-		BuscaMaxima buscamaxima2 =new BuscaMaxima(parte1);
-		buscamaxima2.start();
-		try {
-			buscamaxima2.join();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		int maxima2=buscamaxima2.getMaxima();
-		 
-		BuscaMaxima buscamaxima3 =new BuscaMaxima(parte1);
-		buscamaxima3.start();
-		try {
-			buscamaxima3.join();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		int maxima3=buscamaxima3.getMaxima();
-		
-		BuscaMaxima buscamaxima4 =new BuscaMaxima(parte1);
-		buscamaxima4.start();
-		try {
-			buscamaxima4.join();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		int maxima4=buscamaxima4.getMaxima();
-		
+
+		int longitud = (temperaturas.length)/10;
+		int comienzo = 0;
 
 		
-		//comparo las 4 temperaturas máximas: las pongo en un array y repito el bucle de buscamaxima
-		int comparacion[]= {maxima1, maxima2, maxima3, maxima4};
-		int maxima=maxima1;
-		for(int i=0;i<comparacion.length;i++) {
-
-			if(comparacion[i]>maxima){
-				maxima=comparacion[i];
-			}
+		//Creo una matrix de 10 hilos
 		
-
+		BuscaMaxima arrayBuscaMaxima[] = new BuscaMaxima[10];
+		int[] maxima = new int[10];
 		
-
-		/*
-		 * Funciona con un solo hilo
-		*Creo el hilo
-		*BuscaMaxima bucle1 =new BuscaMaxima(temperaturas);
-		*bucle1.start();
+		//Lanzo los hilos
 		
-        * Espero a que el hilo termine antes de continuar. Si no hago esto, no devuelve bien 
-        * la temperatura máxima, devuelve 0* 
+		for(int i=0;i<10;i++) {
+			// Creo el hilo con la matriz correspondiente
+		    arrayBuscaMaxima[i] = new BuscaMaxima(Arrays.copyOfRange(temperaturas, comienzo, comienzo + longitud));
 
-         *   try {
-				bucle1.join();
+		    // Muevo la modificación de comienzo y longitud después de la creación del hilo
+		    comienzo += longitud;
+		    longitud = temperaturas.length / 10; // Restablezco la longitud a su valor original
+
+		    // Inicio el hilo
+		    arrayBuscaMaxima[i].start();
+		    
+		    //Espero a que los hilos terminen
+		    try {
+				arrayBuscaMaxima[i].join();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+		
 				e.printStackTrace();
 			}
-  
-		int temperaturamaxima=bucle1.getMaxima();
+		    
+		    //Devuelvo el resultado maximo
+		    maxima[i] = arrayBuscaMaxima[i].getMaxima();
+			
+			
+		}
 		
-		System.out.println("La temperatura más alta los últimos diez años fue "
-				+ temperaturamaxima + "ºC.");
-		*/
+	
+		
+		//comparo las 4 temperaturas máximas: las pongo en un array y repito el bucle de buscamaxima
+		int comparacion=maxima[0];
+		for(int i=0;i<maxima.length-1;i++) {
+
+			if(comparacion<maxima[i]){
+				comparacion=maxima[i];
+			}
+
 	}
-		System.out.println("La temperatura máxima de de " + maxima + "ºC");
+		System.out.println("La temperatura máxima de de " + comparacion + "ºC");
 }
 }
